@@ -10,7 +10,7 @@ FROM curl as kubectl-downloader
 
 # Can get latest via:
 # curl -L -s https://dl.k8s.io/release/stable.txt
-ARG k8s_version=v1.20.2
+ARG k8s_version="v1.20.2"
 ARG OS=${TARGETOS:-linux}
 ARG ARCH=${TARGETARCH:-amd64}
 
@@ -48,7 +48,7 @@ RUN wget "https://github.com/mikefarah/yq/releases/download/$YQ_VERSION/$YQ_BINA
 
 
 
-FROM adoptopenjdk/openjdk11:alpine-jre
+FROM adoptopenjdk/openjdk11:jre-11.0.10_9-alpine
 
 COPY --from=yq-downloader --chown=root:root /usr/local/bin/yq /usr/local/bin/yq
 
