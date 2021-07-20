@@ -1,4 +1,4 @@
-FROM alpine:3.12.4 as curl
+FROM alpine:3.12.7 as downloader
 
 WORKDIR /
 
@@ -6,11 +6,11 @@ RUN apk add curl
 
 
 
-FROM curl as kubectl-downloader
+FROM downloader as kubectl-downloader
 
 # Can get latest via:
 # curl -L -s https://dl.k8s.io/release/stable.txt
-ARG k8s_version="v1.20.2"
+ARG k8s_version="v1.21.3"
 ARG OS=${TARGETOS:-linux}
 ARG ARCH=${TARGETARCH:-amd64}
 
@@ -21,9 +21,9 @@ RUN chmod 0755 /kubectl
 
 
 
-FROM curl as helm-downloader
+FROM downloader as helm-downloader
 
-ARG helm_version="v3.5.1"
+ARG helm_version="v3.6.3"
 ARG OS=${TARGETOS:-linux}
 ARG ARCH=${TARGETARCH:-amd64}
 
@@ -37,18 +37,18 @@ RUN chmod 0755 /usr/local/bin/helm
 
 
 
-FROM curl as yq-downloader
+FROM downloader as yq-downloader
 
 ARG OS=${TARGETOS:-linux}
 ARG ARCH=${TARGETARCH:-amd64}
-ARG YQ_VERSION="v4.6.0"
+ARG YQ_VERSION="v4.11.1"
 ARG YQ_BINARY="yq_${OS}_$ARCH"
 RUN wget "https://github.com/mikefarah/yq/releases/download/$YQ_VERSION/$YQ_BINARY" -O /usr/local/bin/yq && \
     chmod +x /usr/local/bin/yq
 
 
 
-FROM adoptopenjdk/openjdk11:jre-11.0.10_9-alpine
+FROM adoptopenjdk/openjdk11:jre-11.0.11_9-alpine
 
 COPY --from=yq-downloader --chown=root:root /usr/local/bin/yq /usr/local/bin/yq
 
