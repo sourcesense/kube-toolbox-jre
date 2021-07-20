@@ -1,4 +1,4 @@
-FROM alpine:3.12.4 as curl
+FROM alpine:3.12.4 as downloader
 
 WORKDIR /
 
@@ -6,7 +6,7 @@ RUN apk add curl
 
 
 
-FROM curl as kubectl-downloader
+FROM downloader as kubectl-downloader
 
 # Can get latest via:
 # curl -L -s https://dl.k8s.io/release/stable.txt
@@ -21,7 +21,7 @@ RUN chmod 0755 /kubectl
 
 
 
-FROM curl as helm-downloader
+FROM downloader as helm-downloader
 
 ARG helm_version="v3.5.1"
 ARG OS=${TARGETOS:-linux}
@@ -37,7 +37,7 @@ RUN chmod 0755 /usr/local/bin/helm
 
 
 
-FROM curl as yq-downloader
+FROM downloader as yq-downloader
 
 ARG OS=${TARGETOS:-linux}
 ARG ARCH=${TARGETARCH:-amd64}
