@@ -48,7 +48,7 @@ RUN wget "https://github.com/mikefarah/yq/releases/download/$YQ_VERSION/$YQ_BINA
 
 
 
-FROM adoptopenjdk/openjdk11:jre-11.0.10_9-alpine
+FROM adoptopenjdk/openjdk11:jre-11.0.11_9-alpine
 
 COPY --from=yq-downloader --chown=root:root /usr/local/bin/yq /usr/local/bin/yq
 
