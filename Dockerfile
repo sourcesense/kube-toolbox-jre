@@ -10,7 +10,7 @@ FROM downloader as kubectl-downloader
 
 # Can get latest via:
 # curl -L -s https://dl.k8s.io/release/stable.txt
-ARG k8s_version="v1.20.2"
+ARG k8s_version="v1.21.3"
 ARG OS=${TARGETOS:-linux}
 ARG ARCH=${TARGETARCH:-amd64}
 
