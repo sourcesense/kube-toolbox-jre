@@ -1,4 +1,4 @@
-FROM alpine:3.12.4 as downloader
+FROM alpine:3.12.7 as downloader
 
 WORKDIR /
 
