@@ -23,7 +23,7 @@ RUN chmod 0755 /kubectl
 
 FROM downloader as helm-downloader
 
-ARG helm_version="v3.7.0-rc.3"
+ARG helm_version="v3.7.0"
 ARG OS=${TARGETOS:-linux}
 ARG ARCH=${TARGETARCH:-amd64}
 
