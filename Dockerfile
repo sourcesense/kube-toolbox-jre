@@ -41,7 +41,7 @@ FROM downloader as yq-downloader
 
 ARG OS=${TARGETOS:-linux}
 ARG ARCH=${TARGETARCH:-amd64}
-ARG YQ_VERSION="v4.12.2"
+ARG YQ_VERSION="v4.23.1"
 ARG YQ_BINARY="yq_${OS}_$ARCH"
 RUN wget "https://github.com/mikefarah/yq/releases/download/$YQ_VERSION/$YQ_BINARY" -O /usr/local/bin/yq && \
     chmod +x /usr/local/bin/yq
