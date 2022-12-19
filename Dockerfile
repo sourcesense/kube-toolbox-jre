@@ -48,7 +48,7 @@ RUN wget "https://github.com/mikefarah/yq/releases/download/$YQ_VERSION/$YQ_BINA
 
 
 
-FROM adoptopenjdk/openjdk11:jre-11.0.14.1_1-alpine
+FROM eclipse-temurin:17.0.5_8-jre
 
 COPY --from=yq-downloader --chown=root:root /usr/local/bin/yq /usr/local/bin/yq
 
